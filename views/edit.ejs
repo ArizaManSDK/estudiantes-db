@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Estudiante</title>
+    <link rel="stylesheet" href="/css/bulma.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="/img/logo.jpg" width="35" height="5">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Estudiantes</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="/add">Añadir nuevo Estudiante</a>
+                        <a class="navbar-item" href="/students">Listado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary is-rounded" href="/">Inicio</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Editar Estudiante</h1>
+            <form action="/edit/<%= student.id %>" method="POST">
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input is-rounded" type="text" name="nombre" value="<%= student.nombre %>" maxlength="40" pattern="[a-zA-Z ]{1,40}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Apellido</label>
+                    <div class="control">
+                        <input class="input is-rounded" type="text" name="apellido" value="<%= student.apellido %>" maxlength="40" pattern="[a-zA-Z ]{1,40}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Cédula</label>
+                    <div class="control">
+                        <input class="input is-rounded" type="text" name="cedula" value="<%= student.cedula %>" maxlength="8" pattern="\d{1,8}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Carrera</label>
+                    <div class="control">
+                        <div class="select is-rounded">
+                            <select name="carrera" required>
+                                <option value="ING de sistemas" <%= student.carrera === 'ING de sistemas' ? 'selected' : '' %>>ING de sistemas</option>
+                                <option value="ING petroquímica" <%= student.carrera === 'ING petroquímica' ? 'selected' : '' %>>ING petroquímica</option>
+                                <option value="ING telecomunicaciones" <%= student.carrera === 'ING telecomunicaciones' ? 'selected' : '' %>>ING telecomunicaciones</option>
+                                <option value="Lic. Turismo" <%= student.carrera === 'Lic. Turismo' ? 'selected' : '' %>>Lic. Turismo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Semestre</label>
+                    <div class="control">
+                        <div class="select is-rounded">
+                            <select name="semestre" required>
+                                <option value="CINU" <%= student.semestre === 'CINU' ? 'selected' : '' %>>CINU</option>
+                                <option value="1" <%= student.semestre === '1' ? 'selected' : '' %>>1</option>
+                                <option value="2" <%= student.semestre === '2' ? 'selected' : '' %>>2</option>
+                                <option value="3" <%= student.semestre === '3' ? 'selected' : '' %>>3</option>
+                                <option value="4" <%= student.semestre === '4' ? 'selected' : '' %>>4</option>
+                                <option value="5" <%= student.semestre === '5' ? 'selected' : '' %>>5</option>
+                                <option value="6" <%= student.semestre === '6' ? 'selected' : '' %>>6</option>
+                                <option value="7" <%= student.semestre === '7' ? 'selected' : '' %>>7</option>
+                                <option value="8" <%= student.semestre === '8' ? 'selected' : '' %>>8</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Promedio del Estudiante</label>
+                    <div class="control">
+                        <input class="input is-rounded" type="decimal" name="nota_final" value="<%= student.nota_final %>" min="0" max="120" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-link is-rounded" type="submit">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Bulma JavaScript for Navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
